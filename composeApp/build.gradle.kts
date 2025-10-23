@@ -27,6 +27,7 @@ kotlin {
             implementation(projects.core.designsystem)
             implementation(projects.core.datastore)
             implementation(projects.core.data)
+            implementation(projects.core.network)
 
             // todo: need to remove(필요한 것만 빼고 삭제)
             implementation(compose.runtime)

@@ -1,5 +1,6 @@
 package io.vallab.movies
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.vallab.movies.core.data.coreDataSettingModule
 import io.vallab.movies.core.datastore.coreDatastoreCoreModules
 import io.vallab.movies.core.designsystem.theme.VallabTheme
+import io.vallab.movies.core.network.coreNetworkModules
 import movies.composeapp.generated.resources.NotoSans
 import movies.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
@@ -36,7 +38,10 @@ internal fun App(
         darkTheme = isDarkTheme,
         fontFamily = fontFamily,
     ) {
-        Box(modifier = Modifier.fillMaxSize())
+        Box(
+            modifier = Modifier.fillMaxSize()
+                .background(VallabTheme.colorScheme.background),
+        )
     }
 }
 
@@ -46,6 +51,9 @@ internal val appModule = module {
 
     // core: data
     includes(coreDataSettingModule)
+
+    // core: network
+    includes(coreNetworkModules)
 
     viewModelOf(::AppViewModel)
 }

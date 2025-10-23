@@ -9,4 +9,6 @@ plugins {
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.androidLint) apply false
+    alias(libs.plugins.kotlinxSerialization) apply false
+    alias(libs.plugins.buildkonfig) apply false
 }
