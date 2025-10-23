@@ -24,6 +24,11 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(projects.core.designsystem)
+            implementation(projects.core.datastore)
+            implementation(projects.core.data)
+
+            // todo: need to remove(필요한 것만 빼고 삭제)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

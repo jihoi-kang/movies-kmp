@@ -1,40 +1,58 @@
 package io.vallab.movies
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.vallab.movies.core.data.coreDataSettingModule
+import io.vallab.movies.core.datastore.coreDatastoreCoreModules
+import io.vallab.movies.core.designsystem.theme.VallabTheme
 import movies.composeapp.generated.resources.NotoSans
 import movies.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.KoinApplication
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
 @Composable
-@Preview
-fun App(fontFamily: FontFamily = FontFamily(Font(resource = Res.font.NotoSans))) {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-        }
+internal fun App(
+    viewModel: AppViewModel = koinViewModel(),
+    onDarkThemeChange: ((Boolean) -> Unit)? = null,
+    fontFamily: FontFamily = FontFamily(Font(resource = Res.font.NotoSans)),
+) {
+    val isDarkTheme by viewModel.isDarkTheme.collectAsStateWithLifecycle()
+
+    LaunchedEffect(isDarkTheme) {
+        onDarkThemeChange?.invoke(isDarkTheme)
     }
+
+    VallabTheme(
+        darkTheme = isDarkTheme,
+        fontFamily = fontFamily,
+    ) {
+        Box(modifier = Modifier.fillMaxSize())
+    }
+}
+
+internal val appModule = module {
+    // core: datastore
+    includes(coreDatastoreCoreModules)
+
+    // core: data
+    includes(coreDataSettingModule)
+
+    viewModelOf(::AppViewModel)
+}
+
+internal fun vallabAppDeclaration(
+    additionalDeclaration: KoinApplication.() -> Unit = {},
+): KoinAppDeclaration = {
+    modules(appModule)
+    additionalDeclaration()
 }

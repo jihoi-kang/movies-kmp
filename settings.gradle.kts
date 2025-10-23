@@ -34,3 +34,5 @@ include(":composeApp")
 
 // core
 include(":core:designsystem")
+include(":core:data")
+include(":core:datastore")
