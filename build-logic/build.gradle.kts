@@ -20,5 +20,9 @@ gradlePlugin {
             id = "vallab.compose.multiplatform"
             implementationClass = "io.vallab.movies.convention.ComposeMultiPlatformConventionPlugin"
         }
+        register("vallabFeature") {
+            id = "vallab.feature"
+            implementationClass = "io.vallab.movies.convention.VallabFeaturePlugin"
+        }
     }
 }
