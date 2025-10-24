@@ -37,3 +37,10 @@ include(":core:designsystem")
 include(":core:data")
 include(":core:datastore")
 include(":core:network")
+include(":core:navigation")
+
+// feature
+include(":feature:main")
+include(":feature:home")
+include(":feature:setting")
+include(":feature:movie-detail")

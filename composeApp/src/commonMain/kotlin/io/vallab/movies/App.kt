@@ -1,18 +1,15 @@
 package io.vallab.movies
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.vallab.movies.core.data.coreDataSettingModule
 import io.vallab.movies.core.datastore.coreDatastoreCoreModules
 import io.vallab.movies.core.designsystem.theme.VallabTheme
 import io.vallab.movies.core.network.coreNetworkModules
+import io.vallab.movies.feature.main.MainScreen
 import movies.composeapp.generated.resources.NotoSans
 import movies.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
@@ -38,10 +35,7 @@ internal fun App(
         darkTheme = isDarkTheme,
         fontFamily = fontFamily,
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-                .background(VallabTheme.colorScheme.background),
-        )
+        MainScreen()
     }
 }
 

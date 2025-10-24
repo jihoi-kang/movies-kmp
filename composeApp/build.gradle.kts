@@ -28,16 +28,12 @@ kotlin {
             implementation(projects.core.datastore)
             implementation(projects.core.data)
             implementation(projects.core.network)
+            implementation(projects.feature.main)
+            implementation(projects.feature.home)
+            implementation(projects.feature.setting)
+            implementation(projects.feature.movieDetail)
 
-            // todo: need to remove(필요한 것만 빼고 삭제)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.compose.viewmodel.navigation)
         }
     }
