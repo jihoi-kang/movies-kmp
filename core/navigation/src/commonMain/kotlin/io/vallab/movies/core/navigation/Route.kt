@@ -4,9 +4,13 @@ import kotlinx.serialization.Serializable
 
 sealed interface Route {
     @Serializable
-    data object Home : Route
-    @Serializable
-    data object Setting : Route
-    @Serializable
     data class Detail(val movieId: Int) : Route
+}
+
+sealed interface MainTabRoute : Route {
+    @Serializable
+    data object Home : MainTabRoute
+
+    @Serializable
+    data object Setting : MainTabRoute
 }
